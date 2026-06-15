@@ -1,0 +1,28 @@
+name: OpenPass
+title: OpenPass
+subtitle: '🔐 TOTP 两步验证管理器 | TOTP authenticator'
+icon: https://lh3.googleusercontent.com/nWEwn8gsmsB0bwswseQkaMY2BM_p00gOztatMvc-WBJoDCUxVyaQt4K0SuBtsmDly7zLGkAPfnX7QfiYiT9u6VE_W4I=s60
+cover: https://lh3.googleusercontent.com/nWEwn8gsmsB0bwswseQkaMY2BM_p00gOztatMvc-WBJoDCUxVyaQt4K0SuBtsmDly7zLGkAPfnX7QfiYiT9u6VE_W4I=s60
+description: OpenPass 是一款 Chrome 浏览器扩展，专注于 TOTP 验证码管理。所有密钥仅存储在浏览器本地，不上传云端，保护您的隐私安全。
+repo: kovawx/openpass
+search:
+  filter: /wiki/openpass/
+  placeholder: 在 OpenPass 中搜索...
+leftbar: 
+  - tree
+  - timeline_openpass_releases
+  - related
+comment_title: '评论区仅供交流，有问题请提 [issue](https://github.com/kovawx/openpass/issues) 反馈。'
+comments:
+  service: giscus
+  giscus:
+    data-repo: kovawx/openpass
+    data-mapping: number
+    data-term: 226
+license: true
+share: true
+base_dir: /wiki/openpass/
+tree:
+  '快速开始':
+    - index
+    - releases

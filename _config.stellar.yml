@@ -1,0 +1,105 @@
+logo:
+  subtitle: '记录生活和随笔 | 开发什么の，还是算了吧'
+
+menubar:
+  columns: 4 # 一行多少个
+  items: # 可按照自己需求增加，符合以下格式即可
+    - id: post # 页面中高亮的 menu_id
+      theme: '#1BCDFC' # 高亮时的颜色，仅 svg 中 fill="currentColor" 时有效
+      icon: solar:documents-bold-duotone # 支持 svg/img 标签，可以定义在 icons.yml 文件中，也支持外部图片的 URL
+      title: 博客 # 标题
+      url: / # 跳转链接，支持相对路径和绝对路径
+    - id: wiki
+      theme: '#3DC550'
+      icon: solar:notebook-bookmark-bold-duotone
+      title: 文档
+      url: /wiki/
+    - id: explore
+      theme: '#FA6400'
+      icon: solar:planet-bold-duotone
+      title: 探索
+      url: /explore/
+    - id: social
+      theme: '#F44336'
+      icon: solar:chat-square-like-bold-duotone
+      title: 社交
+      url: /friends/
+
+# 文章搜索
+search:
+  service: local_search # local_search, todo...
+  local_search:
+    field: all # post, page, all
+    path: /search.json # 搜索文件存放位置
+    content: true # 是否搜索内容
+    skip_search: [] # 指定 path 中的内容不被搜索。
+    codeblock: true # 是否搜索代码块（需要content: true)
+
+
+style:
+  font-size:
+    root: 16px
+    body: .9375rem # 15px
+    code: 85% # 14px
+    codeblock: 0.8125rem # 13px
+  font-family:
+    body: 'system-ui, "Microsoft Yahei", "Segoe UI", Arial, sans-serif'
+    code: 'Menlo, Monaco, Consolas, system-ui, monospace, sans-serif'
+    codeblock: 'Menlo, Monaco, Consolas, system-ui, monospace, sans-serif'
+
+# 站点主结构树
+site_tree:
+  # -- 列表类页面 -- #
+  # 主页配置
+  home:
+    leftbar: recent, timeline
+    rightbar: welcome
+  # 博客列表页配置
+  index_blog:
+    base_dir: blog # 只影响自动生成的页面路径
+    menu_id: post # 未在 front-matter 中指定 menu_id 时，layout 为 post 的页面默认使用这里配置的 menu_id
+    leftbar: welcome, recent # for categories/tags/archives
+    rightbar: timeline
+    nav_tabs:  # 近期发布 分类 标签 专栏 归档 and ...
+      # '朋友文章': /friends/rss/
+  # 博客专栏列表页配置
+  index_topic:
+    base_dir: topic # 只影响自动生成的页面路径
+    menu_id: post # 未在 front-matter 中指定 menu_id 时，layout 为 topic 的页面默认使用这里配置的 menu_id
+  # 文档列表页配置
+  index_wiki:
+    base_dir: wiki # 只影响自动生成的页面路径
+    menu_id: wiki # 未在 front-matter 中指定 menu_id 时，layout 为 wiki 的页面默认使用这里配置的 menu_id
+    leftbar: ghissues, related, recent # for wiki
+    rightbar: timeline
+    nav_tabs:
+      'more': https://github.com/kovawx?tab=repositories
+
+footer:
+  social:
+    github:
+      icon: '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder/social/08a41b181ce68.svg"/>'
+      url: https://github.com/kovawx
+    comments:
+      icon: '<img src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.3/social/942ebbf1a4b91.svg"/>'
+      url: /about/#comments
+  sitemap:
+    '博客':
+      - '[近期](/)'
+      - '[分类](/blog/categories/)'
+      - '[标签](/blog/tags/)'
+      - '[归档](/blog/archives/)'
+    '项目':
+      - '[OpenPass](/wiki/tags/OpenPass/)'
+    '社交':
+      - '[友链](/friends/)'
+      - '[留言板](/about/#comments)'
+    '更多':
+      - '[关于本站](/about/)'
+      - '[GitHub](https://github.com/kovawx)'
+
+article:
+  # npm i hexo-related-popular-posts
+  related_posts:
+    enable: true
+    title: 您可能感兴趣的文章
