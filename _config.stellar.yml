@@ -1,8 +1,18 @@
+# 源站地址（配置后非源站访问将提示，防止镜像克隆）
+canonical:
+  closeEnable: true # 是否显示关闭提示按钮
+  closeText: 关闭提示 # 关闭提示按钮的文字描述
+  originalHost: blog.kovawx.eu # 主站点域名主机
+  officialHosts: # 官方主机列表，每行一个
+    - kovawx.eu
+    - blog.kovawx.eu
+    - localhost
+
 logo:
   subtitle: '记录生活和随笔 | 开发什么の，还是算了吧'
 
 menubar:
-  columns: 4 # 一行多少个
+  columns: 3 # 一行多少个
   items: # 可按照自己需求增加，符合以下格式即可
     - id: post # 页面中高亮的 menu_id
       theme: '#1BCDFC' # 高亮时的颜色，仅 svg 中 fill="currentColor" 时有效
@@ -14,11 +24,6 @@ menubar:
       icon: solar:notebook-bookmark-bold-duotone
       title: 文档
       url: /wiki/
-    - id: explore
-      theme: '#FA6400'
-      icon: solar:planet-bold-duotone
-      title: 探索
-      url: /explore/
     - id: social
       theme: '#F44336'
       icon: solar:chat-square-like-bold-duotone
@@ -39,7 +44,7 @@ search:
 style:
   font-size:
     root: 16px
-    body: .9375rem # 15px
+    body: 16px # 由 15px 上调，提升中文正文可读性
     code: 85% # 14px
     codeblock: 0.8125rem # 13px
   font-family:
@@ -58,8 +63,8 @@ site_tree:
   index_blog:
     base_dir: blog # 只影响自动生成的页面路径
     menu_id: post # 未在 front-matter 中指定 menu_id 时，layout 为 post 的页面默认使用这里配置的 menu_id
-    leftbar: welcome, recent # for categories/tags/archives
-    rightbar: timeline
+    leftbar: recent, timeline # for categories/tags/archives
+    rightbar: welcome, tags # for categories/tags/archives
     nav_tabs:  # 近期发布 分类 标签 专栏 归档 and ...
       # '朋友文章': /friends/rss/
   # 博客专栏列表页配置
@@ -74,27 +79,23 @@ site_tree:
     rightbar: timeline
     nav_tabs:
       'more': https://github.com/kovawx?tab=repositories
-  
+
 
 footer:
   social:
     github:
       icon: '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder/social/08a41b181ce68.svg"/>'
       url: https://github.com/kovawx
-    comments:
-      icon: '<img src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.3/social/942ebbf1a4b91.svg"/>'
-      url: /about/#comments
   sitemap:
     '博客':
       - '[近期](/)'
-      - '[分类](/blog/categories/)'
-      - '[标签](/blog/tags/)'
-      - '[归档](/blog/archives/)'
+      - '[分类](/categories/)'
+      - '[标签](/tags/)'
+      - '[归档](/archives/)'
     '项目':
-      - '[OpenPass](/wiki/tags/OpenPass/)'
+      - '[OpenPass](/wiki/openpass/)'
     '社交':
       - '[友链](/friends/)'
-      - '[留言板](/about/#comments)'
     '更多':
       - '[关于本站](/about/)'
       - '[GitHub](https://github.com/kovawx)'

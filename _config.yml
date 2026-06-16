@@ -4,18 +4,18 @@
 
 # Site
 title: Kovawx
-subtitle: 
-description: 
-keywords:
+subtitle: Kovawx 的个人博客
+description: Kovawx 的个人博客，记录生活随笔与开发笔记，分享 OpenPass 等开源项目。
+keywords: [Kovawx, 博客, OpenPass, 开发笔记, TOTP]
 avatar: /images/avatar.png
 author: Kovawx
 language: zh-CN
-timezone: 'UTC'
+timezone: 'Asia/Shanghai'
 favicon: /images/favicon.ico
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://blog.kovawx.eu
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -76,7 +76,7 @@ tag_map:
 meta_generator: true
 
 # Date / Time format
-## Hexo uses Moment.js to parse and display date
+## Hexo uses Moment.js to parse and display dates
 ## You can customize the date format as defined in
 ## http://momentjs.com/docs/#/displaying/format/
 date_format: YYYY-MM-DD

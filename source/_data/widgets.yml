@@ -37,27 +37,13 @@ ghuser:
 ghrepo:
   layout: ghrepo
 
-linklist:
-  layout: linklist
-  columns: 1 
-  items:
-    - icon: '<svg...></svg>' # 或者 icons.yml 中设置的 icon 名称
-      title: 关于
-      url: /about/
-
 welcome:
   layout: markdown
-  title: 欢迎欢迎
+  title: 关于本站
   content: |
-    欢迎使用 [Stellar](https://github.com/xaoxuu/hexo-theme-stellar/) 主题，下面是您的入门指南，祝您使用愉快！
+    你好，欢迎来到我的博客，这里记录生活随笔与开发笔记。
     <br>
-    **第一步**
-    创建 `blog/_config.stellar.yml` 文件，在此文件中填写需要自定义的主题配置。
-    <br>
-    **第二步**
-    创建 `blog/source/_data/widgets.yml` 文件，此文件中填写需要自定义的侧边栏组件，例如 `welcome` 组件。
-    <br>
-    如果有任何疑问，请先查阅 [文档](https://xaoxuu.com/wiki/stellar/)，如果文档中没有提供，请提 [issue](https://github.com/xaoxuu/hexo-theme-stellar/issues/) 向开发者询问。
+    📌 我在维护 [OpenPass](/wiki/openpass/) —— 一款本地优先、注重隐私的 TOTP 验证码浏览器扩展，欢迎了解。
 
 timeline_openpass_releases:
   layout: timeline
