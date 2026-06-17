@@ -1,0 +1,67 @@
+name: Deploy to Cloudflare Pages
+
+# 触发：push 到 main → 生产部署；PR → 预览部署；支持手动触发
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# 同一分支只保留最新一次部署
+concurrency:
+  group: cf-pages-${{ github.ref }}
+  cancel-in-progress: true
+
+# 需要在仓库 Settings → Secrets and variables → Actions 配置：
+#   Secrets:
+#     CLOUDFLARE_API_TOKEN     具有 Cloudflare Pages:Edit 权限的 API Token
+#     CLOUDFLARE_ACCOUNT_ID    Cloudflare 账户 ID（仪表盘右下角）
+#   Variables（非敏感）:
+#     CLOUDFLARE_PROJECT_NAME  Cloudflare Pages 项目名（默认 blog）
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    # 跳过 fork PR：fork 拿不到 secrets，部署会失败
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    environment:
+      # push main → production 环境；PR → preview/<分支>
+      name: ${{ github.event_name == 'pull_request' && format('preview/{0}', github.head_ref) || 'production' }}
+      url: ${{ github.event_name == 'pull_request' && format('https://{0}.{1}.pages.dev', github.head_ref, vars.CLOUDFLARE_PROJECT_NAME || 'blog') || 'https://blog.kovawx.eu' }}
+    steps:
+      - name: Checkout（含 themes/stellar 子模块）
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node（读 .nvmrc，锁定 Node 22）
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build site
+        run: |
+          pnpm run clean
+          pnpm run build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # main → 生产；PR 源分支 → 预览（自动路由到 <branch>.<project>.pages.dev）
+          command: pages deploy public --project-name=${{ vars.CLOUDFLARE_PROJECT_NAME || 'blog' }} --branch=${{ github.head_ref || github.ref_name }}
