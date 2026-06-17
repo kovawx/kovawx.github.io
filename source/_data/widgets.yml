@@ -43,9 +43,10 @@ welcome:
   content: |
     你好，欢迎来到我的博客，这里记录生活随笔与开发笔记。
     <br>
-    📌 我在维护 [OpenPass](/wiki/openpass/) —— 一款本地优先、注重隐私的 TOTP 验证码浏览器扩展，欢迎了解。
+    📌 我在维护 [OpenPass](/wiki/openpass/) —— 一款解放双手，本地优先的 TOTP 验证码浏览器扩展，欢迎了解。
 
-timeline_openpass_releases:
+timeline_openpass_issues:
   layout: timeline
   title: 近期动态
   api: https://api.github.com/repos/kovawx/openpass/issues
+  limit: 15
