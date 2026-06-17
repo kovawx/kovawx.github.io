@@ -1,0 +1,38 @@
+name: Friends Manager
+
+on:
+  issues:
+    types: [opened, closed, reopened, labeled, unlabeled]
+  workflow_dispatch:
+
+jobs:
+  friends-manager:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate data.json
+        uses: xaoxuu/issues2json@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          data_version: 'v2'
+          data_path: 'source/friends/data.json'
+          sort: 'created-desc'
+          exclude_issue_with_labels: '审核中'
+          hide_labels: '白名单'
+
+      - name: Setup Git Config
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Commit and Push
+        run: |
+          git add source/friends/data.json
+          git commit -m "Update friends data" || echo "No changes to commit"
+          git push

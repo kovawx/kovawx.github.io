@@ -1,0 +1,48 @@
+name: 友链申请
+description: 提交你的博客信息，申请交换友链。
+labels: ['审核中']
+body:
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 自查清单
+      description: 请认真填写自查清单中的每一项，如实描述情况才会更快通过审核，请不要乱选。
+      options:
+        - required: true
+          label: 合法合规，非经营类、非商业类、非采集站。
+        - required: true
+          label: 原创内容为主，有一定数量的原创文章。
+  - type: textarea
+    id: json-data
+    validations:
+      required: true
+    attributes:
+      label: 友链信息
+      description: 请按下方 JSON 格式填写，不需要修改格式。
+      value: |
+        <!--
+        请在下方 `JSON` 代码块中填写，字段说明：
+        - title: 站点名称
+        - url: 站点地址
+        - icon: 站点图标
+        - description: 一句话描述
+        - feed: RSS 地址（可选，用于展示最新文章）
+        -->
+        
+        ```json
+        {
+            "title": "",
+            "url": "",
+            "icon": "",
+            "description": "",
+            "feed": ""
+        }
+        ```
+  - type: input
+    id: friends-url
+    attributes:
+      label: 友链页面地址
+      description: 填写你的友链页面地址，方便我添加你的友链。
+      placeholder: "例: https://example.com/friends/"
+    validations:
+      required: true
