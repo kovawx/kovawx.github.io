@@ -6,17 +6,21 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "server": "hexo server"
+    "server": "hexo server",
+    "sync-releases": "node tools/sync-releases.js",
+    "new-post": "node tools/new-post.js"
   },
   "hexo": {
     "version": "8.1.2"
   },
   "dependencies": {
     "hexo": "^8.1.2",
+    "hexo-abbrlink": "^2.2.1",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",
     "hexo-generator-feed": "^4.0.0",
     "hexo-generator-index": "^4.0.0",
+    "hexo-generator-sitemap": "^3.0.1",
     "hexo-generator-tag": "^2.0.0",
     "hexo-related-popular-posts": "^5.0.1",
     "hexo-renderer-ejs": "^2.0.0",

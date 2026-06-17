@@ -16,11 +16,14 @@ favicon: /images/favicon.ico
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://blog.kovawx.eu
-permalink: :year/:month/:day/:title/
+permalink: posts/:abbrlink/
+abbrlink:
+  alg: crc32  # 算法：crc16 或 crc32
+  rep: hex    # 进制：hex (十六进制) 或 dec (十进制)
 permalink_defaults:
 pretty_urls:
-  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
-  trailing_html: true # Set to false to remove trailing '.html' from permalinks
+  trailing_index: false # Set to false to remove trailing 'index.html' from permalinks
+  trailing_html: false # Set to false to remove trailing '.html' from permalinks
 
 # Directory
 source_dir: source
@@ -104,3 +107,11 @@ theme: stellar
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+# Sitemap 自动生成配置
+sitemap:
+  path: sitemap.xml
+  tag: true        # 是否将“标签页”加入站点地图（可选，建议开启）
+  category: true   # 是否将“分类页”加入站点地图（可选，建议开启）
+  topic: true      # 是否将“专栏页”加入站点地图（可选，建议开启）
+  wiki: true       # 是否将“文档页”加入站点地图（可选，建议开启）
