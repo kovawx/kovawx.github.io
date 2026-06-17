@@ -10,7 +10,7 @@ search:
   placeholder: 在 OpenPass 中搜索...
 leftbar: 
   - tree
-  - timeline_openpass_releases
+  - timeline_openpass_issues
   - related
 comment_title: '评论区仅供交流，有问题请提 [issue](https://github.com/kovawx/openpass/issues) 反馈。'
 comments:
@@ -25,4 +25,9 @@ base_dir: /wiki/openpass/
 tree:
   '快速开始':
     - index
-    - releases
+  '2026年':
+    - 2026/v021_0617
+    - 2026/v020_0430
+    - 2026/v011_0325
+    - 2026/v010_0325
+    - 2026/v001_0323

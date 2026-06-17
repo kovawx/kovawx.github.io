@@ -1,5 +1,6 @@
 ---
 wiki: openpass 
+title: 一键安装
 ---
 
 ### 安装
