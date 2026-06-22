@@ -34,7 +34,7 @@ jobs:
       url: ${{ github.event_name == 'pull_request' && format('https://{0}.{1}.pages.dev', github.head_ref, vars.CLOUDFLARE_PROJECT_NAME || 'blog') || 'https://blog.kovawx.eu' }}
     steps:
       - name: Checkout（含 themes/stellar 子模块）
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           submodules: recursive
           fetch-depth: 1
