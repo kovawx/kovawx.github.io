@@ -2,8 +2,13 @@ name: Friends Manager
 
 on:
   issues:
+    # 新增（打开）/关闭/重新打开/设置标签/移除标签
     types: [opened, closed, reopened, labeled, unlabeled]
+  # 手动触发
   workflow_dispatch:
+  # 每天凌晨4点（UTC+8）运行一次，检查失联并刷新数据
+  schedule:
+    - cron: '0 20 * * *'
 
 jobs:
   friends-manager:
@@ -15,6 +20,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
+      # 仅在定时和手动触发时检查链接是否失联（issue 事件只刷新数据，省 API）
+      - name: Check Reachability
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        uses: xaoxuu/links-checker@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          checker: 'reachability'
+          unreachable_label: '失联'
+          exclude_issue_with_labels: '审核中, 白名单' # 具有哪些标签的 issue 不进行检查
+
       - name: Generate data.json
         uses: xaoxuu/issues2json@main
         env:
@@ -22,9 +38,9 @@ jobs:
         with:
           data_version: 'v2'
           data_path: 'source/friends/data.json'
-          sort: 'created-desc'
-          exclude_issue_with_labels: '审核中'
-          hide_labels: '白名单'
+          sort: 'posts-desc'
+          exclude_issue_with_labels: '审核中, 风险网站' # 具有哪些标签的 issue 不生成到 JSON 中
+          hide_labels: '白名单' # 这些标签不显示在前端页面
 
       - name: Setup Git Config
         run: |
