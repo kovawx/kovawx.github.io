@@ -32,6 +32,17 @@ jobs:
           unreachable_label: '失联'
           exclude_issue_with_labels: '审核中, 白名单' # 具有哪些标签的 issue 不进行检查
 
+      # 抓取每个友链的 feed，解析最新文章并写回 issue（供下一步 issues2json 提取 posts）
+      # 这一步是 data.json 里 posts 字段的来源，缺它则前端显示"RSS 解析失败"
+      - name: Parse friend feeds
+        uses: xaoxuu/feed-posts-parser@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          posts_count: '2'
+          date_format: 'YYYY-MM-DD HH:mm'
+          timezone: '+8'
+
       - name: Generate data.json
         uses: xaoxuu/issues2json@main
         env:
