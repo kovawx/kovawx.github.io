@@ -9,7 +9,22 @@
       "feed": "https://blog.kovawx.eu/atom.xml",
       "posts": [],
       "issue_number": 5,
-      "labels": []
+      "labels": [
+        {
+          "name": "status:403",
+          "color": "ededed",
+          "hue": 0,
+          "saturation": 0,
+          "lightness": 93
+        },
+        {
+          "name": "失联",
+          "color": "ededed",
+          "hue": 0,
+          "saturation": 0,
+          "lightness": 93
+        }
+      ]
     }
   ]
 }
