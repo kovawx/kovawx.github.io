@@ -16,6 +16,7 @@ jobs:
     permissions:
       contents: write
       issues: write
+      actions: write # 允许触发 deploy workflow（workflow_dispatch）
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -47,8 +48,23 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
+      # 提交 data.json 变更；用 changed 标记是否有实际改动，避免无意义的部署
       - name: Commit and Push
+        id: commit
         run: |
           git add source/friends/data.json
-          git commit -m "[feat] Update friends data" || echo "No changes to commit"
-          git push
+          if git commit -m "[feat] Update friends data"; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git push
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No changes to commit"
+          fi
+
+      # data.json 有变更时，主动触发 deploy（GITHUB_TOKEN 的 push 不触发 push 事件，
+      # 但 workflow_dispatch 可以被 GITHUB_TOKEN 触发）
+      - name: Trigger deploy
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run deploy.yml --ref main
