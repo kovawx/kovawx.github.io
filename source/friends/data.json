@@ -1,4 +1,15 @@
 {
   "version": "v2",
-  "content": []
+  "content": [
+    {
+      "title": "Kovawx",
+      "url": "https://blog.kovawx.eu",
+      "icon": "https://blog.kovawx.eu/images/favicon.ico",
+      "description": "记录生活和随笔 | 开发什么の，还是算了吧",
+      "feed": "https://blog.kovawx.eu/atom.xml",
+      "posts": [],
+      "issue_number": 5,
+      "labels": []
+    }
+  ]
 }
